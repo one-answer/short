@@ -135,3 +135,6 @@ wrangler.toml
 .wrangler/*
 
 .wrangler
+
+#idea
+.idea/
