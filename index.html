@@ -18,47 +18,108 @@
     </script>
     <style>
       :root {
-        --color-primary: #5c7cfa;
-        --color-primary-dark: #4263eb;
-        --color-primary-alpha: #5c7cfa50;
+        --color-primary: #4263eb;
+        --color-primary-dark: #3b5bdb;
+        --color-primary-light: #5c7cfa;
+        --color-primary-alpha: rgba(66, 99, 235, 0.25);
 
-        --body-color: #495057;
-        --body-bg: #f8f9fa;
+        --color-success: #12b886;
+        --color-success-light: #38d9a9;
+        --color-error: #fa5252;
+        --color-error-light: #ff8787;
 
-        --border-color: #dee2e6;
+        --body-color: #333;
+        --body-bg: #f9fafb;
+        --card-bg: #ffffff;
+
+        --border-color: #e9ecef;
+        --border-radius: 8px;
+        --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        
+        --transition-speed: 0.3s;
       }
 
       body {
-        max-width: 30rem;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 2rem;
-        padding-right: 2rem;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
         color: var(--body-color);
         background: var(--body-bg);
         font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        line-height: 1.5;
+        line-height: 1.6;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         text-rendering: optimizelegibility;
         -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      header {
+        text-align: center;
+        padding: 2.5rem 1rem 1.5rem;
+      }
+
+      .logo {
+        margin-bottom: 1rem;
+      }
+
+      .tagline {
+        margin: -1rem 0 1rem;
+        color: #6c757d;
+        font-size: 1.1rem;
+        font-weight: 300;
+      }
+
+      main {
+        flex: 1;
+        width: 100%;
+        max-width: 32rem;
+        margin: 0 auto;
+        padding: 0 1.5rem 2rem;
+      }
+
+      .card {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .input-group {
+        margin-bottom: 1.25rem;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #495057;
       }
 
       a {
         color: var(--color-primary);
         text-decoration: none;
-        transition: color .3s;
+        transition: color var(--transition-speed);
       }
 
       a:hover {
-        color: var(--color-primary);
+        color: var(--color-primary-dark);
         text-decoration: underline;
       }
 
       h1 {
-        font-size: 5rem;
-        font-weight: 300;
+        font-size: 3.5rem;
+        font-weight: 700;
         text-align: center;
-        opacity: .2;
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin: 0;
+        padding: 0;
+        letter-spacing: -1px;
       }
 
       main[x-cloak] {
@@ -67,7 +128,7 @@
 
       main:not([x-cloak]) {
         opacity: 1;
-        transition: opacity .3s;
+        transition: opacity var(--transition-speed);
       }
 
       input {
@@ -75,40 +136,63 @@
         appearance: none;
         display: block;
         width: 100%;
-        padding: .5rem 1rem;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.5rem;
         border: 1px solid var(--border-color);
-        border-radius: .25rem;
+        border-radius: var(--border-radius);
         box-sizing: border-box;
-        color: #33404d;
+        color: var(--body-color);
         line-height: inherit;
         font-size: 1rem;
-        transition: border .3s, box-shadow .3s;
+        background-color: var(--card-bg);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+        transition: all var(--transition-speed);
       }
 
       input:focus {
-        box-shadow: 0 0 0 .25rem var(--color-primary-alpha);
+        box-shadow: 0 0 0 3px var(--color-primary-alpha);
         border-color: var(--color-primary);
         outline: 0;
       }
 
       details {
-        margin: 1rem 0 2rem;
+        margin: 1rem 0 1.5rem;
         border: 1px solid var(--border-color);
-        border-radius: .25rem;
-        transition: background .3s;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        background-color: var(--card-bg);
+        transition: all var(--transition-speed);
       }
 
       details[open] {
-        background: #fff;
+        background: var(--card-bg);
       }
 
       details summary {
-        padding: .5rem 1rem;
-        font-weight: 500;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
         user-select: none;
         cursor: pointer;
-        opacity: .8;
+        opacity: 0.9;
         outline: 0;
+        position: relative;
+      }
+
+      details summary:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      details summary::after {
+        content: '▼';
+        position: absolute;
+        right: 1rem;
+        transform: scale(0.7);
+        opacity: 0.5;
+        transition: transform var(--transition-speed);
+      }
+
+      details[open] summary::after {
+        transform: scale(0.7) rotate(180deg);
       }
 
       details div {
@@ -118,8 +202,11 @@
 
       details small {
         margin: 0;
-        font-size: .875rem;
-        line-height: 2;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        opacity: 0.7;
+        display: block;
+        margin-top: 0.5rem;
       }
 
       button {
@@ -128,82 +215,107 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        margin-bottom: 5rem;
-        padding: .5rem .75rem;
-        border: 1px solid var(--color-primary);
-        border-radius: .25rem;
-        background: var(--color-primary);
+        margin: 1.5rem 0 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border: none;
+        border-radius: var(--border-radius);
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
         color: #fff;
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: 600;
         line-height: inherit;
         cursor: pointer;
         user-select: none;
-        transition: border .3s, background .3s,;
+        transition: all var(--transition-speed);
+        box-shadow: 0 2px 5px rgba(66, 99, 235, 0.2);
       }
 
       button:hover {
-        border-color: var(--color-primary-dark);
-        background: var(--color-primary-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(66, 99, 235, 0.3);
+      }
+
+      button:active {
+        transform: translateY(1px);
+        box-shadow: 0 1px 3px rgba(66, 99, 235, 0.2);
       }
 
       button:focus {
-        box-shadow: 0 0 0 .25rem var(--color-primary-alpha);
-        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px var(--color-primary-alpha), 0 2px 5px rgba(66, 99, 235, 0.2);
         outline: 0;
       }
 
       button:disabled {
-        background: var(--color-primary);
-        border-color: var(--color-primary);
-        opacity: .6;
+        opacity: 0.7;
         cursor: not-allowed;
+        transform: none;
+      }
+
+      button.loading {
+        position: relative;
       }
 
       button.loading::before {
         content: '';
         display: inline-block;
-        margin-right: .5rem;
-        border: 2px solid #fff;
-        border-top-color: transparent;
-        border-bottom-color: transparent;
+        margin-right: 0.5rem;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-top-color: #fff;
         border-radius: 50%;
-        width: .75rem;
-        height: .75rem;
-        animation: rotate .5s linear infinite;
+        width: 1rem;
+        height: 1rem;
+        animation: rotate 0.7s linear infinite;
       }
 
       footer {
-        padding: 1rem;
+        padding: 1.5rem 1rem;
+        background-color: #f1f3f5;
         border-top: 1px solid var(--border-color);
         text-align: center;
-        opacity: .5;
+        margin-top: auto;
+      }
+
+      .footer-content {
+        max-width: 32rem;
+        margin: 0 auto;
+        opacity: 0.7;
+      }
+
+      footer p {
+        margin: 0.3rem 0;
+        font-size: 0.9rem;
+      }
+
+      footer .copyright {
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
       }
 
       footer i {
         font-style: normal;
-        color: #ff8787;
+        color: var(--color-error);
       }
 
       .success,
       .error {
-        margin-bottom: 1rem;
-        padding: .5rem 1rem;
-        border-radius: .25rem;
+        margin-bottom: 1.25rem;
+        padding: 0.75rem 1rem;
+        border-radius: var(--border-radius);
         color: #fff;
         text-align: center;
-        opacity: 1;
-        transition: opacity .3s;
+        font-weight: 500;
+        box-shadow: var(--box-shadow);
+        animation: fadeIn var(--transition-speed);
       }
 
       .success {
-        border: 1px solid #12b886;
-        background: #38d9a9;
+        border: 1px solid var(--color-success);
+        background: var(--color-success-light);
       }
 
       .error {
-        border: 1px solid #fa5252;
-        background: #ff8787;
+        border: 1px solid var(--color-error);
+        background: var(--color-error-light);
       }
 
       @keyframes rotate {
@@ -211,24 +323,132 @@
           transform: rotate(360deg);
         }
       }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      @media (max-width: 640px) {
+        header {
+          padding: 1.5rem 1rem 1rem;
+        }
+        
+        h1 {
+          font-size: 2.8rem;
+        }
+        
+        .tagline {
+          font-size: 1rem;
+        }
+        
+        .card {
+          padding: 1.25rem;
+        }
+        
+        button {
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      .api-status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.75rem;
+        padding: 0.5rem;
+        border-radius: var(--border-radius);
+        background-color: rgba(0, 0, 0, 0.03);
+        font-size: 0.85rem;
+        color: #6c757d;
+      }
+      
+      .api-status .indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+      }
+      
+      .api-status .indicator.online {
+        background-color: var(--color-success);
+      }
+      
+      .api-status .indicator.offline {
+        background-color: var(--color-error);
+      }
+      
+      .api-status .indicator.checking {
+        background-color: #fab005;
+        animation: blink 1s infinite;
+      }
+      
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+      
+      .retry-button {
+        background: none;
+        border: none;
+        color: var(--color-primary);
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        font-size: 0.85rem;
+        font-weight: normal;
+        margin-left: 0.5rem;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      
+      .retry-button:hover {
+        color: var(--color-primary-dark);
+        box-shadow: none;
+        transform: none;
+      }
     </style>
   </head>
   <body>
-    <header><h1>short</h1></header>
+    <header>
+      <div class="logo">
+        <h1>short</h1>
+        <p class="tagline">简单高效的短链接服务</p>
+      </div>
+    </header>
     <main x-data="app" x-cloak>
-      <p x-show.transition.opacity="alert" :class="alert?.type" x-text="alert?.message"></p>
-      <input placeholder="输入要缩短的网址..." x-model="url" x-ref="url" />
-      <details>
-        <summary>自定义设置</summary>
-        <div>
-          <input placeholder="slug" x-model="slug" />
-          <small>Slug 默认是随机生成的短 id。</small>
+      <div class="card">
+        <p x-show.transition.opacity="alert" :class="alert?.type" x-text="alert?.message"></p>
+        <div class="input-group">
+          <label for="url-input">输入长网址</label>
+          <input id="url-input" placeholder="https://example.com/your-long-url..." x-model="url" x-ref="url" />
         </div>
-      </details>
-      <button :class="{ loading }" :disabled="loading || isValidated()" @click="submit($refs, $nextTick)">生成</button>
+        <details>
+          <summary>自定义设置</summary>
+          <div>
+            <div class="input-group">
+              <label for="slug-input">自定义短链接</label>
+              <input id="slug-input" placeholder="自定义短链接标识（可选）" x-model="slug" />
+              <small>Slug 默认是随机生成的短 id。您可以自定义标识以便于记忆或分享。</small>
+            </div>
+          </div>
+        </details>
+        <button :class="{ loading }" :disabled="loading || isValidated()" @click="submit($refs, $nextTick)">
+          <span x-text="loading ? '处理中...' : '生成短链接'"></span>
+        </button>
+        
+        <div class="api-status" x-show="apiStatus">
+          <div class="indicator" :class="apiStatus"></div>
+          <span x-text="apiStatusMessage"></span>
+          <button class="retry-button" x-show="apiStatus === 'offline'" @click="checkApiStatus">重试</button>
+        </div>
+      </div>
     </main>
     <footer>
-     service
+      <div class="footer-content">
+        <p>高效、安全的短链接服务</p>
+        <p class="copyright">© 2023 Short Link Service</p>
+      </div>
     </footer>
     <script src="asset/js/alpine.js"></script>
     <script>
@@ -237,6 +457,12 @@
         slug: '',
         alert: null,
         loading: false,
+        apiStatus: null,
+        apiStatusMessage: '',
+        init() {
+          // 页面加载后检查API状态
+          this.checkApiStatus();
+        },
         isValidated () {
           return !/^https?:\/\/.{3,}/.test(this.url)
         },
@@ -262,9 +488,38 @@
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(body)
           })
-            .then(res => res.json())
+            .then(res => {
+              // 检查响应状态
+              if (!res.ok) {
+                throw new Error(`服务器返回错误：${res.status} ${res.statusText}`);
+              }
+              
+              // 检查Content-Type头，确保是JSON
+              const contentType = res.headers.get('content-type');
+              if (!contentType || !contentType.includes('application/json')) {
+                // 更新API状态为离线
+                this.apiStatus = 'offline';
+                this.apiStatusMessage = 'API状态：离线（返回了非JSON格式的响应）';
+                throw new Error('服务器返回了非JSON格式的响应，这可能表示API服务不可用。请稍后再试。');
+              }
+              
+              return res.json().catch(e => {
+                // 特别处理JSON解析错误
+                if (e.message && e.message.includes("Unexpected token '<'")) {
+                  // 更新API状态为离线
+                  this.apiStatus = 'offline';
+                  this.apiStatusMessage = 'API状态：离线（返回了HTML而非JSON）';
+                  throw new Error('服务器返回了HTML页面而非预期的JSON数据，这通常意味着API服务不可用或请求被重定向。请稍后再试。');
+                }
+                throw e;
+              });
+            })
             .then(res => {
               this.loading = false
+              // 如果成功，将API状态设置为在线
+              this.apiStatus = 'online';
+              this.apiStatusMessage = 'API状态：在线';
+              
               if (res.message) {
                 this.alert = { type: 'error', message: res.message }
                 return
@@ -274,12 +529,49 @@
 
               $nextTick(() => {
                 $refs.url.select()
-                this.alert = { type: 'success', message: `链接 ${document.execCommand('Copy') ? '复制' : '生成'} ` }
+                this.alert = { type: 'success', message: `链接 ${document.execCommand('Copy') ? '复制' : '生成'} 成功！` }
               })
             })
             .catch(e => {
-              this.alert = { type: 'error', message: e.message }
+              console.error('Error:', e);
+              this.alert = { type: 'error', message: e.message || '请求出错，请稍后再试。' }
               this.loading = false
+            })
+        },
+        checkApiStatus () {
+          this.apiStatus = 'checking'
+          this.apiStatusMessage = '正在检查API状态...'
+
+          fetch('/api-status')
+            .then(res => {
+              if (!res.ok) {
+                throw new Error(`服务器返回错误：${res.status} ${res.statusText}`);
+              }
+              
+              // 检查Content-Type头
+              const contentType = res.headers.get('content-type');
+              if (!contentType || !contentType.includes('application/json')) {
+                throw new Error('服务器返回了非JSON格式的响应');
+              }
+              
+              return res.json().catch(e => {
+                // 处理JSON解析错误
+                throw new Error('无法解析服务器响应');
+              });
+            })
+            .then(res => {
+              if (res.status === 'online') {
+                this.apiStatus = 'online'
+                this.apiStatusMessage = 'API状态：在线'
+              } else {
+                this.apiStatus = 'offline'
+                this.apiStatusMessage = 'API状态：离线'
+              }
+            })
+            .catch(e => {
+              console.error('API Status Check Error:', e);
+              this.apiStatus = 'offline'
+              this.apiStatusMessage = 'API状态：离线'
             })
         }
       }
