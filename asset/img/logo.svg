@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#f472b6" />
+    </linearGradient>
+    <linearGradient id="linkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e5e7eb" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  
+  <!-- Rounded square background -->
+  <rect x="56" y="56" width="400" height="400" rx="100" fill="url(#bgGradient)" filter="url(#shadow)" />
+  
+  <!-- Chain link design -->
+  <g transform="translate(128, 128) scale(0.5)">
+    <!-- First link -->
+    <path d="M180 170 L120 230 Q90 260 120 290 L180 350 Q210 380 240 350 L300 290 Q330 260 300 230 L240 170 Q210 140 180 170 Z" 
+          stroke="url(#linkGradient)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    
+    <!-- Second link (connected) -->
+    <path d="M330 170 L270 230 Q240 260 270 290 L330 350 Q360 380 390 350 L450 290 Q480 260 450 230 L390 170 Q360 140 330 170 Z" 
+          stroke="url(#linkGradient)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  </g>
+  
+  <!-- Sparkle effects -->
+  <circle cx="120" cy="120" r="15" fill="white" opacity="0.7" />
+  <circle cx="400" cy="380" r="10" fill="white" opacity="0.5" />
+  <circle cx="380" cy="140" r="8" fill="white" opacity="0.6" />
+</svg>
