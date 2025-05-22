@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="asset/img/logo.svg" type="image/svg+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>短链服务</title>
+    <title>短链服务 - 简单高效的短链接生成工具</title>
+    <meta name="description" content="免费的短链接生成服务，将长网址转换为简短易记的链接，支持自定义短链接标识，高效、安全、可靠。" />
+    <meta name="keywords" content="短链接,短网址,URL缩短,链接缩短,短链服务,短链生成器" />
+    <meta name="author" content="Short Link Service" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://short.aolifu.org/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://short.aolifu.org/" />
+    <meta property="og:title" content="短链服务 - 简单高效的短链接生成工具" />
+    <meta property="og:description" content="免费的短链接生成服务，将长网址转换为简短易记的链接，支持自定义短链接标识，高效、安全、可靠。" />
+    <meta property="og:image" content="https://short.aolifu.org/asset/img/logo.svg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://short.aolifu.org/" />
+    <meta property="twitter:title" content="短链服务 - 简单高效的短链接生成工具" />
+    <meta property="twitter:description" content="免费的短链接生成服务，将长网址转换为简短易记的链接，支持自定义短链接标识，高效、安全、可靠。" />
+    <meta property="twitter:image" content="https://short.aolifu.org/asset/img/logo.svg" />
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3811349067654166"
             crossorigin="anonymous"></script>
     <!-- Google tag (gtag.js) -->
@@ -15,6 +37,29 @@
       gtag('js', new Date());
 
       gtag('config', 'G-21D7F07ZHR');
+    </script>
+
+    <!-- JSON-LD structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "短链服务",
+      "url": "https://short.aolifu.org/",
+      "description": "免费的短链接生成服务，将长网址转换为简短易记的链接，支持自定义短链接标识，高效、安全、可靠。",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "CNY"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Short Link Service",
+        "url": "https://short.aolifu.org/"
+      }
+    }
     </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -710,7 +755,8 @@
     <header>
       <div class="theme-toggle-container">
         <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
-          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="亮色主题图标">
+            <title>亮色主题</title>
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -721,14 +767,15 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
-          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="暗色主题图标">
+            <title>暗色主题</title>
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
       </div>
       <div class="logo">
         <div class="logo-image">
-          <img src="asset/img/logo.svg" alt="Short Logo" width="80" height="80">
+          <img src="asset/img/logo.svg" alt="短链服务 - 简单高效的短链接生成工具" width="80" height="80">
         </div>
         <h1>short</h1>
         <p class="tagline">简单高效的短链接服务</p>
@@ -765,7 +812,8 @@
     <footer>
       <div class="footer-content">
         <p>高效、安全的短链接服务</p>
-        <p class="copyright">© 2025 Short Link Service</p>
+        <p class="copyright">© 2023-<span id="current-year">2023</span> Short Link Service</p>
+        <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
       </div>
     </footer>
     <script src="asset/js/alpine.js"></script>
