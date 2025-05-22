@@ -17,26 +17,83 @@
       gtag('config', 'G-21D7F07ZHR');
     </script>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
       :root {
-        --color-primary: #4263eb;
-        --color-primary-dark: #3b5bdb;
-        --color-primary-light: #5c7cfa;
-        --color-primary-alpha: rgba(66, 99, 235, 0.25);
+        /* Common variables */
+        --border-radius: 12px;
+        --transition-speed: 0.3s;
 
-        --color-success: #12b886;
-        --color-success-light: #38d9a9;
-        --color-error: #fa5252;
-        --color-error-light: #ff8787;
+        /* Light theme (default) */
+        --color-primary: #6366f1;
+        --color-primary-dark: #4f46e5;
+        --color-primary-light: #818cf8;
+        --color-primary-alpha: rgba(99, 102, 241, 0.25);
+        --color-secondary: #f472b6;
+        --color-secondary-dark: #ec4899;
 
-        --body-color: #333;
+        --color-success: #10b981;
+        --color-success-light: #34d399;
+        --color-error: #ef4444;
+        --color-error-light: #f87171;
+
+        --body-color: #1f2937;
         --body-bg: #f9fafb;
         --card-bg: #ffffff;
+        --border-color: #e5e7eb;
+        --box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        --input-bg: #ffffff;
+        --details-bg: #ffffff;
+        --footer-bg: linear-gradient(180deg, rgba(243, 244, 246, 0) 0%, #f3f4f6 100%);
+        --footer-border: rgba(229, 231, 235, 0.7);
+        --label-color: #4b5563;
+        --tagline-color: #6b7280;
+        --footer-text: #6b7280;
+        --footer-copyright: #9ca3af;
+        --api-status-bg: rgba(0, 0, 0, 0.02);
+        --api-status-border: rgba(0, 0, 0, 0.03);
+        --api-status-color: #6b7280;
+        --details-hover: rgba(0, 0, 0, 0.02);
+        --placeholder-color: #9ca3af;
+        --theme-toggle-bg: #e5e7eb;
+        --theme-toggle-color: #4b5563;
+        --theme-toggle-shadow: rgba(0, 0, 0, 0.05);
+      }
 
-        --border-color: #e9ecef;
-        --border-radius: 8px;
-        --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        
-        --transition-speed: 0.3s;
+      [data-theme="dark"] {
+        --color-primary: #818cf8;
+        --color-primary-dark: #6366f1;
+        --color-primary-light: #a5b4fc;
+        --color-primary-alpha: rgba(129, 140, 248, 0.25);
+        --color-secondary: #f472b6;
+        --color-secondary-dark: #ec4899;
+
+        --color-success: #10b981;
+        --color-success-light: #34d399;
+        --color-error: #ef4444;
+        --color-error-light: #f87171;
+
+        --body-color: #e5e7eb;
+        --body-bg: #111827;
+        --card-bg: #1f2937;
+        --border-color: #374151;
+        --box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        --input-bg: #374151;
+        --details-bg: #1f2937;
+        --footer-bg: linear-gradient(180deg, rgba(17, 24, 39, 0) 0%, #111827 100%);
+        --footer-border: rgba(55, 65, 81, 0.7);
+        --label-color: #d1d5db;
+        --tagline-color: #9ca3af;
+        --footer-text: #9ca3af;
+        --footer-copyright: #6b7280;
+        --api-status-bg: rgba(255, 255, 255, 0.05);
+        --api-status-border: rgba(255, 255, 255, 0.1);
+        --api-status-color: #9ca3af;
+        --details-hover: rgba(255, 255, 255, 0.05);
+        --placeholder-color: #6b7280;
+        --theme-toggle-bg: #374151;
+        --theme-toggle-color: #e5e7eb;
+        --theme-toggle-shadow: rgba(0, 0, 0, 0.2);
       }
 
       body {
@@ -44,8 +101,8 @@
         margin: 0 auto;
         padding: 0;
         color: var(--body-color);
-        background: var(--body-bg);
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background: linear-gradient(135deg, var(--body-bg) 0%, var(--body-bg) 100%);
+        font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         line-height: 1.6;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         text-rendering: optimizelegibility;
@@ -53,73 +110,179 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+
+      /* Decorative elements */
+      body::before,
+      body::after {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        z-index: -1;
+        filter: blur(80px);
+        opacity: 0.15;
+      }
+
+      body::before {
+        background: var(--color-primary);
+        top: -100px;
+        right: -100px;
+        animation: float 15s ease-in-out infinite alternate;
+      }
+
+      body::after {
+        background: var(--color-secondary);
+        bottom: -100px;
+        left: -100px;
+        animation: float 20s ease-in-out infinite alternate-reverse;
+      }
+
+      @keyframes float {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        100% { transform: translate(30px, 30px) rotate(10deg); }
       }
 
       header {
         text-align: center;
-        padding: 2.5rem 1rem 1.5rem;
+        padding: 3rem 1rem 2rem;
+        position: relative;
       }
 
       .logo {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo::before {
+        content: '';
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 100%);
+        border-radius: 50%;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-120px);
+        z-index: -1;
+        opacity: 0.2;
+        filter: blur(10px);
       }
 
       .tagline {
-        margin: -1rem 0 1rem;
-        color: #6c757d;
-        font-size: 1.1rem;
+        margin: -0.5rem 0 1.5rem;
+        color: var(--tagline-color);
+        font-size: 1.2rem;
         font-weight: 300;
+        letter-spacing: 0.5px;
+        animation: fadeIn 1s ease-out;
       }
 
       main {
         flex: 1;
         width: 100%;
-        max-width: 32rem;
+        max-width: 36rem;
         margin: 0 auto;
-        padding: 0 1.5rem 2rem;
+        padding: 0 1.5rem 3rem;
+        position: relative;
+        z-index: 1;
       }
 
       .card {
         background-color: var(--card-bg);
         border-radius: var(--border-radius);
         box-shadow: var(--box-shadow);
-        padding: 1.5rem;
+        padding: 2rem;
         margin-bottom: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        transform: translateY(0);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: cardAppear 0.6s ease-out;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.05);
+      }
+
+      @keyframes cardAppear {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       .input-group {
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.5rem;
       }
 
       .input-group label {
         display: block;
         margin-bottom: 0.5rem;
         font-weight: 500;
-        color: #495057;
+        color: var(--label-color);
+        font-size: 0.95rem;
+        letter-spacing: 0.3px;
       }
 
       a {
         color: var(--color-primary);
         text-decoration: none;
         transition: color var(--transition-speed);
+        position: relative;
       }
 
       a:hover {
         color: var(--color-primary-dark);
-        text-decoration: underline;
+      }
+
+      a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: var(--color-primary);
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.3s ease-out;
+      }
+
+      a:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
       }
 
       h1 {
-        font-size: 3.5rem;
+        font-size: 3.8rem;
         font-weight: 700;
         text-align: center;
-        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
         margin: 0;
         padding: 0;
         letter-spacing: -1px;
+        position: relative;
+        display: inline-block;
+      }
+
+      h1::after {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 4px;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+        border-radius: 2px;
       }
 
       main[x-cloak] {
@@ -136,7 +299,7 @@
         appearance: none;
         display: block;
         width: 100%;
-        padding: 0.75rem 1rem;
+        padding: 0.9rem 1.2rem;
         margin-bottom: 0.5rem;
         border: 1px solid var(--border-color);
         border-radius: var(--border-radius);
@@ -144,8 +307,8 @@
         color: var(--body-color);
         line-height: inherit;
         font-size: 1rem;
-        background-color: var(--card-bg);
-        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+        background-color: var(--input-bg);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
         transition: all var(--transition-speed);
       }
 
@@ -155,39 +318,49 @@
         outline: 0;
       }
 
+      input::placeholder {
+        color: var(--placeholder-color);
+        opacity: 0.7;
+      }
+
       details {
-        margin: 1rem 0 1.5rem;
+        margin: 1.5rem 0 2rem;
         border: 1px solid var(--border-color);
         border-radius: var(--border-radius);
         overflow: hidden;
-        background-color: var(--card-bg);
+        background-color: var(--details-bg);
         transition: all var(--transition-speed);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
       }
 
       details[open] {
-        background: var(--card-bg);
+        background: var(--details-bg);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
       }
 
       details summary {
-        padding: 0.75rem 1rem;
+        padding: 0.9rem 1.2rem;
         font-weight: 600;
         user-select: none;
         cursor: pointer;
         opacity: 0.9;
         outline: 0;
         position: relative;
+        color: var(--label-color);
+        transition: all 0.3s ease;
       }
 
       details summary:hover {
-        background-color: rgba(0, 0, 0, 0.02);
+        background-color: var(--details-hover);
+        color: var(--color-primary);
       }
 
       details summary::after {
         content: '▼';
         position: absolute;
-        right: 1rem;
+        right: 1.2rem;
         transform: scale(0.7);
-        opacity: 0.5;
+        opacity: 0.6;
         transition: transform var(--transition-speed);
       }
 
@@ -196,7 +369,7 @@
       }
 
       details div {
-        padding: 1rem;
+        padding: 1.2rem;
         border-top: 1px solid var(--border-color);
       }
 
@@ -207,6 +380,7 @@
         opacity: 0.7;
         display: block;
         margin-top: 0.5rem;
+        color: var(--tagline-color);
       }
 
       button {
@@ -215,33 +389,52 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        margin: 1.5rem 0 0.5rem;
-        padding: 0.75rem 1.25rem;
+        margin: 2rem 0 0.5rem;
+        padding: 0.9rem 1.5rem;
         border: none;
         border-radius: var(--border-radius);
-        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
         color: #fff;
-        font-size: 1rem;
+        font-size: 1.05rem;
         font-weight: 600;
         line-height: inherit;
         cursor: pointer;
         user-select: none;
         transition: all var(--transition-speed);
-        box-shadow: 0 2px 5px rgba(66, 99, 235, 0.2);
+        box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.6s ease;
+        z-index: -1;
       }
 
       button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(66, 99, 235, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+      }
+
+      button:hover::before {
+        left: 100%;
       }
 
       button:active {
         transform: translateY(1px);
-        box-shadow: 0 1px 3px rgba(66, 99, 235, 0.2);
+        box-shadow: 0 2px 5px rgba(99, 102, 241, 0.3);
       }
 
       button:focus {
-        box-shadow: 0 0 0 3px var(--color-primary-alpha), 0 2px 5px rgba(66, 99, 235, 0.2);
+        box-shadow: 0 0 0 3px var(--color-primary-alpha), 0 4px 10px rgba(99, 102, 241, 0.3);
         outline: 0;
       }
 
@@ -268,27 +461,32 @@
       }
 
       footer {
-        padding: 1.5rem 1rem;
-        background-color: #f1f3f5;
-        border-top: 1px solid var(--border-color);
+        padding: 2rem 1rem;
+        background: var(--footer-bg);
+        border-top: 1px solid var(--footer-border);
         text-align: center;
         margin-top: auto;
+        position: relative;
+        z-index: 1;
+        transition: background 0.5s ease;
       }
 
       .footer-content {
-        max-width: 32rem;
+        max-width: 36rem;
         margin: 0 auto;
-        opacity: 0.7;
+        opacity: 0.8;
       }
 
       footer p {
         margin: 0.3rem 0;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
+        color: var(--footer-text);
       }
 
       footer .copyright {
-        font-size: 0.8rem;
-        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        margin-top: 0.8rem;
+        color: var(--footer-copyright);
       }
 
       footer i {
@@ -298,8 +496,8 @@
 
       .success,
       .error {
-        margin-bottom: 1.25rem;
-        padding: 0.75rem 1rem;
+        margin-bottom: 1.5rem;
+        padding: 0.9rem 1.2rem;
         border-radius: var(--border-radius);
         color: #fff;
         text-align: center;
@@ -310,12 +508,12 @@
 
       .success {
         border: 1px solid var(--color-success);
-        background: var(--color-success-light);
+        background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-light) 100%);
       }
 
       .error {
         border: 1px solid var(--color-error);
-        background: var(--color-error-light);
+        background: linear-gradient(135deg, var(--color-error) 0%, var(--color-error-light) 100%);
       }
 
       @keyframes rotate {
@@ -323,29 +521,29 @@
           transform: rotate(360deg);
         }
       }
-      
+
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(-10px); }
         to { opacity: 1; transform: translateY(0); }
       }
-      
+
       @media (max-width: 640px) {
         header {
-          padding: 1.5rem 1rem 1rem;
+          padding: 2rem 1rem 1.5rem;
         }
-        
+
         h1 {
-          font-size: 2.8rem;
+          font-size: 3rem;
         }
-        
+
         .tagline {
-          font-size: 1rem;
+          font-size: 1.05rem;
         }
-        
+
         .card {
-          padding: 1.25rem;
+          padding: 1.5rem;
         }
-        
+
         button {
           margin-bottom: 0.5rem;
         }
@@ -355,39 +553,45 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 0.75rem;
-        padding: 0.5rem;
+        margin-top: 1rem;
+        padding: 0.7rem;
         border-radius: var(--border-radius);
-        background-color: rgba(0, 0, 0, 0.03);
+        background-color: var(--api-status-bg);
         font-size: 0.85rem;
-        color: #6c757d;
+        color: var(--api-status-color);
+        border: 1px solid var(--api-status-border);
+        transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
       }
-      
+
       .api-status .indicator {
-        width: 8px;
-        height: 8px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        margin-right: 0.5rem;
+        margin-right: 0.6rem;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
       }
-      
+
       .api-status .indicator.online {
         background-color: var(--color-success);
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
       }
-      
+
       .api-status .indicator.offline {
         background-color: var(--color-error);
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
       }
-      
+
       .api-status .indicator.checking {
-        background-color: #fab005;
+        background-color: #f59e0b;
+        box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
         animation: blink 1s infinite;
       }
-      
+
       @keyframes blink {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
       }
-      
+
       .retry-button {
         background: none;
         border: none;
@@ -396,21 +600,113 @@
         margin: 0;
         padding: 0;
         font-size: 0.85rem;
-        font-weight: normal;
-        margin-left: 0.5rem;
+        font-weight: 500;
+        margin-left: 0.6rem;
         text-decoration: underline;
         cursor: pointer;
       }
-      
+
       .retry-button:hover {
         color: var(--color-primary-dark);
         box-shadow: none;
         transform: none;
       }
+
+      /* Theme toggle styles */
+      .theme-toggle-container {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 10;
+      }
+
+      .theme-toggle {
+        background: var(--theme-toggle-bg);
+        color: var(--theme-toggle-color);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 10px var(--theme-toggle-shadow);
+        transition: all 0.3s ease;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .theme-toggle:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px var(--theme-toggle-shadow);
+      }
+
+      .theme-toggle:active {
+        transform: translateY(1px);
+      }
+
+      .theme-toggle .sun-icon,
+      .theme-toggle .moon-icon {
+        position: absolute;
+        transition: transform 0.5s ease, opacity 0.3s ease;
+      }
+
+      .theme-toggle .sun-icon {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .theme-toggle .moon-icon {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      [data-theme="dark"] .theme-toggle .sun-icon {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      [data-theme="dark"] .theme-toggle .moon-icon {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 640px) {
+        .theme-toggle-container {
+          top: 1rem;
+          right: 1rem;
+        }
+
+        .theme-toggle {
+          width: 36px;
+          height: 36px;
+        }
+      }
     </style>
   </head>
   <body>
     <header>
+      <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
       <div class="logo">
         <h1>short</h1>
         <p class="tagline">简单高效的短链接服务</p>
@@ -436,7 +732,7 @@
         <button :class="{ loading }" :disabled="loading || isValidated()" @click="submit($refs, $nextTick)">
           <span x-text="loading ? '处理中...' : '生成短链接'"></span>
         </button>
-        
+
         <div class="api-status" x-show="apiStatus">
           <div class="indicator" :class="apiStatus"></div>
           <span x-text="apiStatusMessage"></span>
@@ -447,11 +743,34 @@
     <footer>
       <div class="footer-content">
         <p>高效、安全的短链接服务</p>
-        <p class="copyright">© 2023 Short Link Service</p>
+        <p class="copyright">© 2025 Short Link Service</p>
       </div>
     </footer>
     <script src="asset/js/alpine.js"></script>
     <script>
+      // Theme switcher functionality
+      document.addEventListener('DOMContentLoaded', () => {
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Check for saved theme preference or use device preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Apply the theme
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        // Toggle theme when button is clicked
+        themeToggle.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+        });
+      });
+
       const app = {
         url: '',
         slug: '',
@@ -493,7 +812,7 @@
               if (!res.ok) {
                 throw new Error(`服务器返回错误：${res.status} ${res.statusText}`);
               }
-              
+
               // 检查Content-Type头，确保是JSON
               const contentType = res.headers.get('content-type');
               if (!contentType || !contentType.includes('application/json')) {
@@ -502,7 +821,7 @@
                 this.apiStatusMessage = 'API状态：离线（返回了非JSON格式的响应）';
                 throw new Error('服务器返回了非JSON格式的响应，这可能表示API服务不可用。请稍后再试。');
               }
-              
+
               return res.json().catch(e => {
                 // 特别处理JSON解析错误
                 if (e.message && e.message.includes("Unexpected token '<'")) {
@@ -519,7 +838,7 @@
               // 如果成功，将API状态设置为在线
               this.apiStatus = 'online';
               this.apiStatusMessage = 'API状态：在线';
-              
+
               if (res.message) {
                 this.alert = { type: 'error', message: res.message }
                 return
@@ -547,13 +866,13 @@
               if (!res.ok) {
                 throw new Error(`服务器返回错误：${res.status} ${res.statusText}`);
               }
-              
+
               // 检查Content-Type头
               const contentType = res.headers.get('content-type');
               if (!contentType || !contentType.includes('application/json')) {
                 throw new Error('服务器返回了非JSON格式的响应');
               }
-              
+
               return res.json().catch(e => {
                 // 处理JSON解析错误
                 throw new Error('无法解析服务器响应');
